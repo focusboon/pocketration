@@ -20,5 +20,5 @@ export default function Index() {
   }
 
   // For authenticated users, render the app content
-  return <Redirect href="/app" />;
+  return <Redirect href="/home" />;
 }
