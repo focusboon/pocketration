@@ -4,7 +4,7 @@ import React from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function Index() {
-  const { user, loading } = useAuth();
+  const { userData, loading } = useAuth();
 
   if (loading) {
     return (
@@ -15,10 +15,10 @@ export default function Index() {
   }
 
   // Redirect logic
-  if (!user) {
+  if (!userData) {
     return <Redirect href="/auth" />;
   }
 
-  // For authenticated users, render the app content
+  // For authenticated userDatas, render the app content
   return <Redirect href="/home" />;
 }

@@ -86,7 +86,7 @@ export default function ForgotPasswordScreen() {
     <View className="flex-1">
       <View className="flex flex-row items-center gap-1 mt-2 py-3">
         <Back />
-        <Text className="text-2xl font-bold">{getStepTitle()}</Text>
+        <Text className="text-2xl text-orange-500 font-bold">{getStepTitle()}</Text>
       </View>
 
       <View className="p-5">
@@ -164,7 +164,7 @@ export default function ForgotPasswordScreen() {
 
         {step !== STEPS.EMAIL && (
           <Text 
-            className="text-green-500 text-center mt-4"
+            className="text-orange-500 text-center mt-4"
             onPress={() => setStep(step - 1)}
           >
             Go Back

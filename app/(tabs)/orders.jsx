@@ -36,7 +36,7 @@ export default function OrderScreen() {
       <View className="flex-row justify-between items-center mb-6">
         <Text className="text-lg font-bold">My Orders</Text>
         <TouchableOpacity>
-          <Text className="text-orange-500 font-semibold">Track Order</Text>
+          <Text className="text-orange-500 font-semibold">Remove all</Text>
         </TouchableOpacity>
       </View>
 

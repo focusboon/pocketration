@@ -8,7 +8,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "eas-deploy": "eas build -p android --profile preview",
+    "git-commit-all": "git add . && git commit -m 'latest update v1' && git push"
   },
   "dependencies": {
     "@react-navigation/native": "^7.1.6",
@@ -16,6 +18,7 @@
     "expo-linking": "~7.1.5",
     "expo-router": "~5.1.1",
     "expo-splash-screen": "^0.30.9",
+    "firebase": "^11.10.0",
     "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -25,7 +28,8 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "15.11.2",
-    "react-native-web": "~0.20.0"
+    "react-native-web": "~0.20.0",
+    "@react-native-async-storage/async-storage": "2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

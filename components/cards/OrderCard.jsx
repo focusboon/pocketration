@@ -14,12 +14,20 @@ const OrderCard = ({ title, items, total, date, onReorder }) => {
         ))}
       </View>
       <Text className="mt-2 text-lg font-semibold">Total: ${total}</Text>
-      <TouchableOpacity
-        onPress={onReorder}
-        className="mt-4 bg-orange-500 py-2 px-4 rounded-full"
-      >
-        <Text className="text-white text-center">Reorder</Text>
-      </TouchableOpacity>
+      <View className="flex flex-row gap-3">
+        <TouchableOpacity
+          onPress={onReorder}
+          className="mt-4 border border-orange-500 py-2 px-4 rounded-full"
+        >
+          <Text className="text-orange-500  text-center">Track Order</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onReorder}
+          className="mt-4 bg-orange-500 py-2 px-4 rounded-full"
+        >
+          <Text className="text-white text-center">Reorder</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

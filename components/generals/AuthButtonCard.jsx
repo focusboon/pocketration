@@ -1,49 +1,54 @@
 import { Link } from "expo-router";
-import { TouchableOpacity, Text } from "react-native";
 import React from "react";
+import { Text, TouchableOpacity } from "react-native";
 
-const AuthButtonCard = ({ 
-  type = "type-a", 
-  text, 
-  url = '/',
-  disabled = false 
+const AuthButtonCard = ({
+  type = "type-a",
+  text,
+  url = null,
+  onPress,
+  disabled = false,
+  loading,
 }) => {
   const buttonStyles = {
-    "type-a": "bg-green-600",
-    "type-b": "border border-green-600 bg-transparent"
+    "type-a": "bg-orange-500",
+    "type-b": "border border-orange-500 bg-transparent",
   };
 
   const textStyles = {
     "type-a": "text-white",
-    "type-b": "text-green-600"
+    "type-b": "text-orange-500",
   };
 
-  return (
-    <Link 
-      href={url} 
-      asChild
-      disabled={disabled}
+  const baseButton = (
+    <TouchableOpacity
+      className={`
+        w-full 
+        ${buttonStyles[type]} 
+        p-4 rounded-full my-2
+        ${(loading || disabled) ? "opacity-50" : ""}
+      `}
+      activeOpacity={0.8}
+      onPress={onPress}
+      disabled={loading || disabled}
     >
-      <TouchableOpacity
+      <Text
         className={`
-          w-full 
-          ${buttonStyles[type]} 
-          p-4 rounded-full my-2
-          ${disabled ? "opacity-50" : ""}
+          text-center uppercase font-medium py-1 
+          ${textStyles[type]}
         `}
-        activeOpacity={0.8}
-        disabled={disabled}
       >
-        <Text 
-          className={`
-            text-center uppercase font-medium py-1 
-            ${textStyles[type]}
-          `}
-        >
-          {text}
-        </Text>
-      </TouchableOpacity>
+        {loading ? "Loading..." : text}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  return url ? (
+    <Link href={url} asChild>
+      {baseButton}
     </Link>
+  ) : (
+    baseButton
   );
 };
 

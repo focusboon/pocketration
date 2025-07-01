@@ -1,6 +1,7 @@
 import CatCard from "@/components/cards/CatCard"; // Adjust the import path as necessary
 import ProductCard from "@/components/cards/ProductCard"; // Adjust the import path as necessary
 import SliderCard from "@/components/cards/SliderCard"; // Adjust the import path as necessary
+import { useAuth } from "@/contexts/AuthContext";
 import { productData } from "@/data/productData";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -9,6 +10,7 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { userData  } = useAuth();
   const handleNavigate = (route) => {
     router.push(route);
   };
@@ -43,8 +45,8 @@ export default function HomeScreen() {
           {/* Header Section */}
           <View className="flex-row justify-between items-center mb-4">
             <View>
-              <Text className="text-gray-500 text-sm">Good Morning</Text>
-              <Text className="text-lg font-bold">Rafatul Islam</Text>
+              <Text className="text-gray-500 text-sm">Welcome back</Text>
+              <Text className="text-lg font-bold">{userData?.firstName}</Text>
             </View>
             <TouchableOpacity
               onPress={() => handleNavigate("notification")}
@@ -60,7 +62,7 @@ export default function HomeScreen() {
             horizontal
             showsHorizontalScrollIndicator={false}
             data={sliderData}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => index}
             renderItem={({ item }) => (
               <SliderCard key={item.id} uri={item.uri} />
             )}
@@ -78,7 +80,7 @@ export default function HomeScreen() {
             horizontal
             showsHorizontalScrollIndicator={false}
             data={Object.values(productData)}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => index}
             renderItem={({ item }) => <CatCard key={item.id} data={item} />}
             contentContainerStyle={{ paddingBottom: 10 }}
           />
@@ -97,7 +99,7 @@ export default function HomeScreen() {
           <FlatList
             data={productData?.trending?.products?.slice(0, 4)}
             numColumns={2}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) => index}
             renderItem={({ item }) => <ProductCard key={item.id} data={item} />}
             columnWrapperStyle={{ justifyContent: "space-between", gap: 10 }}
             contentContainerStyle={{ paddingBottom: 20 }}
@@ -107,7 +109,7 @@ export default function HomeScreen() {
           {/* More Button */}
           <TouchableOpacity
             onPress={() => handleNavigate("/categories/trending")}
-            className="bg-black py-4 rounded-full items-center mb-16 mt-2"
+            className="bg-orange-500 py-4 rounded-full items-center mb-16 mt-2"
           >
             <Text className="text-white font-semibold">More</Text>
           </TouchableOpacity>

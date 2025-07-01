@@ -25,8 +25,8 @@ export default function CartCard({
 
       {/* Info */}
       <View className="flex-1 px-3">
-        <Text className="text-xs text-gray-400 font-medium">
-          {category.toUpperCase()}
+        <Text className="text-xs text-gray-400 uppercase font-medium">
+          {category || 'Category'}
         </Text>
         <Text className="font-semibold text-base">{title}</Text>
 

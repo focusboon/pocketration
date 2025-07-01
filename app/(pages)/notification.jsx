@@ -3,7 +3,7 @@ import TopBar from "@/components/generals/TopBar";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
-export default function NotificationScreen() {
+export default function Screen() {
   // Sample data for notifications
  const notifications = [
   { 

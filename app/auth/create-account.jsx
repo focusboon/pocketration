@@ -1,11 +1,14 @@
 import AuthButtonCard from "@/components/generals/AuthButtonCard";
 import AuthInput from "@/components/generals/AuthInput";
 import Back from "@/components/generals/Back";
+import { useAuth } from "@/contexts/AuthContext";
 import { Link } from "expo-router";
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 
 export default function RegisterScreen() {
+  const { signUp, loading } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: "",
     surname: "",
@@ -22,8 +25,7 @@ export default function RegisterScreen() {
     }
   };
 
-  const handleSubmit = () => {
-    // Basic validation
+  const handleSubmit = async () => {
     const newErrors = {};
     if (!formData.firstName) newErrors.firstName = "First name is required";
     if (!formData.surname) newErrors.surname = "Surname is required";
@@ -34,17 +36,28 @@ export default function RegisterScreen() {
       setErrors(newErrors);
       return;
     }
+    const extraData = {
+      firstName: formData.firstName,
+      surName: formData.surname,
+    };
 
-    // Proceed with registration
-    console.log("Form data:", formData);
-    // navigation.navigate('create-account'); or your submit logic
+    const res = await signUp(formData.email, formData.password, extraData);
+
+    if (res.success) {
+      console.log("Registered:", res.user.email);
+      // Optional: Save full name to Firestore
+      // Optional: Navigate to home or onboarding
+    } else {
+      console.error("Registration failed:", res.error);
+      // Show error toast or message
+      setErrors({ email: res.error });
+    }
   };
-
   return (
     <View className="flex-1">
       <View className="flex flex-row items-center gap-1 mt-2 py-3">
         <Back />
-        <Text className="text-2xl font-bold ">Create your account</Text>
+        <Text className="text-2xl text-orange-500 font-bold ">Create your account</Text>
       </View>
 
       <View className="p-5">
@@ -85,7 +98,7 @@ export default function RegisterScreen() {
         />
         <Text className="text-sm text-center px-8 mb-5">
           By creating an account you accept all{" "}
-          <Link href="/auth/sign-in" className="text-green-500 pl-2">
+          <Link href="/auth/sign-in" className="text-orange-500 pl-2">
             terms and condition
           </Link>
         </Text>
@@ -93,11 +106,13 @@ export default function RegisterScreen() {
           text="Create account"
           onPress={handleSubmit}
           className="mt-4"
+          loading={loading}
         />
         <Text className="text-center mt-4">
           Already have an account?
-          <Link href="/auth/sign-in" className="text-green-500 pl-2">
-            {' '}Sign in
+          <Link href="/auth/sign-in" className="text-orange-500 pl-2">
+            {" "}
+            Sign in
           </Link>
         </Text>
       </View>

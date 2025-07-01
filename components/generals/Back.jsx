@@ -1,17 +1,13 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 
 export default function Back() {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handlePress = () => {
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.push("/");
-    }
+    router.back();
   };
 
   return (

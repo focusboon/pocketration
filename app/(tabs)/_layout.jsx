@@ -6,7 +6,7 @@ export default function Layout() {
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: "#000",
+        tabBarActiveTintColor: "#f97316",
         tabBarInactiveTintColor: "#999",
         tabBarLabelStyle: { fontSize: 12 },
         tabBarStyle: {
